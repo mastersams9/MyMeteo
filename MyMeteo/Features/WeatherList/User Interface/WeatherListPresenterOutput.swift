@@ -2,14 +2,23 @@
 //  WeatherListPresenterOutput.swift
 //  MyMeteo
 //
-//  Rahim template version 1.0
-//
 //  Created by Sami Benmakhlouf on 30/11/2019.
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
 //
 
 import Foundation
 
-protocol WeatherListPresenterOutput: class {
+protocol AlertParamsProtocol {
+    var title: String { get }
+    var message: String { get }
+    var buttonOkTitle: String { get }
+}
 
+protocol WeatherListPresenterOutput: class {
+    func displayTitle(_ title: String)
+    func showLoader()
+    func hideLoader()
+    func reloadData()
+    func reloadRows(_ indexPaths: [IndexPath])
+    func displayError(_ params: AlertParamsProtocol)
 }

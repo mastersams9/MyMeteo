@@ -1,20 +1,38 @@
 PODS:
+  - DBDebugToolkit (0.5.0)
+  - Kingfisher (5.11.0):
+    - Kingfisher/Core (= 5.11.0)
+  - Kingfisher/Core (5.11.0)
   - ListPlaceholder (1.4)
+  - Nimble (8.0.4)
+  - Quick (2.2.0)
   - Sourcery (0.17.0)
 
 DEPENDENCIES:
+  - DBDebugToolkit (= 0.5.0)
+  - Kingfisher (= 5.11.0)
   - ListPlaceholder (= 1.4)
-  - Sourcery
+  - Nimble (= 8.0.4)
+  - Quick (= 2.2.0)
+  - Sourcery (= 0.17.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DBDebugToolkit
+    - Kingfisher
     - ListPlaceholder
+    - Nimble
+    - Quick
     - Sourcery
 
 SPEC CHECKSUMS:
+  DBDebugToolkit: c04bb6f618051d3de447a4b4323f37826116cfed
+  Kingfisher: 4569606189149e19c7d9439f47e885d0679b7a90
   ListPlaceholder: 08ddaddf67520a20fc52cf37160fb56aa64d071d
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
 
-PODFILE CHECKSUM: 96788b53ba4ce1b7d3ca37fe84c31e2d556bedfb
+PODFILE CHECKSUM: 26040080c983fe147cc08e315902a1df6eaee685
 
 COCOAPODS: 1.6.1

@@ -23,23 +23,73 @@ enum WeatherAPIError: Error {
 }
 
 protocol WeatherAPIProtocol {
+    func cancel(urlString: String)
     func request(urlString: String,
                  method: WeatherAPIMethod,
-                 accessToken: String?,
                  parameters: [String: Any],
                  success: ((Data) -> Void)?,
                  failure: ((WeatherAPIError) -> Void)?)
 }
 
-struct WeatherAPI {}
+struct WeatherAPI {
+
+    private let session: URLSession
+
+    init() {
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 108000.0
+        sessionConfig.timeoutIntervalForResource = 108000.0
+        sessionConfig.requestCachePolicy = .reloadIgnoringLocalCacheData
+        sessionConfig.urlCache = nil
+        self.session = URLSession(configuration: sessionConfig)
+    }
+
+    // MARK: - Private
+
+    private func launchRequestURL(_ url: URL,
+                                 method: WeatherAPIMethod,
+                                 accessToken: String?,
+                                 parameters: [String: Any],
+                                 completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let accessToken = accessToken {
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        request.httpMethod = method.rawValue
+
+        if !parameters.isEmpty {
+            let parametersData = try? JSONSerialization.data(withJSONObject: parameters)
+            request.httpBody = parametersData
+        }
+
+        let task: URLSessionDataTask = session.dataTask(with: request,
+                                                        completionHandler: completionHandler)
+
+        task.resume()
+    }
+
+}
 
 // MARK: - MoblihAPIProtocol
 
 extension WeatherAPI: WeatherAPIProtocol {
+
+    func cancel(urlString: String) {
+        session.getAllTasks { tasks in
+            tasks
+                .filter { $0.state == .running }
+                .filter {
+                    print("originalUrl : \($0.originalRequest?.url?.absoluteString)")
+                    print("urlString : \(urlString)")
+                    return $0.originalRequest?.url?.absoluteString == urlString
+                }.first?
+                .cancel()
+        }
+    }
     
     func request(urlString: String,
                  method: WeatherAPIMethod,
-                 accessToken: String?,
                  parameters: [String: Any],
                  success: ((Data) -> Void)?,
                  failure: ((WeatherAPIError) -> Void)?) {
@@ -47,10 +97,8 @@ extension WeatherAPI: WeatherAPIProtocol {
             failure?(.unknown)
             return
         }
-        
-        print(url)
-        
-        URLSession.launchRequestURL(url, method: method, accessToken: accessToken, parameters: parameters) { dataOpt, response, error in
+
+        launchRequestURL(url, method: method, accessToken: nil, parameters: parameters) { dataOpt, response, error in
             
             switch (response as? HTTPURLResponse)?.statusCode ?? -1 {
             case 200...210:
@@ -93,37 +141,5 @@ extension WeatherAPI: WeatherAPIProtocol {
             }
         }
         
-    }
-}
-
-private extension URLSession {
-    static func launchRequestURL(_ url: URL,
-                                 method: WeatherAPIMethod,
-                                 accessToken: String?,
-                                 parameters: [String: Any],
-                                 completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 108000.0
-        sessionConfig.timeoutIntervalForResource = 108000.0
-        sessionConfig.requestCachePolicy = .reloadIgnoringLocalCacheData
-        sessionConfig.urlCache = nil
-        let session = URLSession(configuration: sessionConfig)
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let accessToken = accessToken {
-            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        }
-        request.httpMethod = method.rawValue
-        
-        if !parameters.isEmpty {
-            let parametersData = try? JSONSerialization.data(withJSONObject: parameters)
-            request.httpBody = parametersData
-        }
-        
-        let task: URLSessionDataTask = session.dataTask(with: request,
-                                                        completionHandler: completionHandler)
-        
-        task.resume()
     }
 }

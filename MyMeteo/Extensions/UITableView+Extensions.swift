@@ -36,4 +36,10 @@ extension UITableView {
             viewToRemove?.removeFromSuperview()
         }
     }
+
+    func reloadData(completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0, animations: { self.reloadData() }) { _ in
+            completion()
+        }
+    }
 }
