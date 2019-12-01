@@ -1,0 +1,20 @@
+PODS:
+  - ListPlaceholder (1.4)
+  - Sourcery (0.17.0)
+
+DEPENDENCIES:
+  - ListPlaceholder (= 1.4)
+  - Sourcery
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ListPlaceholder
+    - Sourcery
+
+SPEC CHECKSUMS:
+  ListPlaceholder: 08ddaddf67520a20fc52cf37160fb56aa64d071d
+  Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
+
+PODFILE CHECKSUM: 96788b53ba4ce1b7d3ca37fe84c31e2d556bedfb
+
+COCOAPODS: 1.6.1
