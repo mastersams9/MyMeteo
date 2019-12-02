@@ -103,6 +103,10 @@ extension WeatherListPresenter: WeatherListPresenterInput {
     func cancelPrefetchingForRowsAt(_ indexPaths: [IndexPath]?) {
         interactor.cancelItems(at: indexPaths?.map { $0.row })
     }
+    
+    func didSelectRowAtIndexPath(_ indexPath: IndexPath) {
+        interactor.didSelect()
+    }
 }
 
 // MARK: - WeatherListInteractorOutput

@@ -146,6 +146,10 @@ extension WeatherListInteractor: WeatherListInteractorInput {
             }
         }
     }
+    
+    func didSelect() {
+    }
+    
 }
 
 // Mark: - Privates

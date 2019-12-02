@@ -32,4 +32,5 @@ protocol WeatherListInteractorInput {
     func item(forIndex index: Int, atCategoryIndex categoryIndex: Int) -> WeatherListInteractorItemProtocol?
     func preloadItems(at indexes: [Int]?)
     func cancelItems(at indexes: [Int]?)
+    func didSelect()
 }

@@ -63,6 +63,18 @@
 		659AD9542393E1A7007B5622 /* france_cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 659AD9532393E1A7007B5622 /* france_cities.json */; };
 		659AD9592393E1F9007B5622 /* FranceCitiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659AD9582393E1F8007B5622 /* FranceCitiesRepository.swift */; };
 		659AD95B2393E203007B5622 /* FranceCitiesRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659AD95A2393E203007B5622 /* FranceCitiesRepositoryProtocol.swift */; };
+		65E0CA6C2395955E00132373 /* WeatherForecastInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA692395955E00132373 /* WeatherForecastInteractorOutput.swift */; };
+		65E0CA6D2395955E00132373 /* WeatherForecastInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA6A2395955E00132373 /* WeatherForecastInteractorInput.swift */; };
+		65E0CA6E2395955E00132373 /* WeatherForecastInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA6B2395955E00132373 /* WeatherForecastInteractor.swift */; };
+		65E0CA762395957000132373 /* WeatherForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA6F2395957000132373 /* WeatherForecastPresenter.swift */; };
+		65E0CA772395957000132373 /* WeatherForecastPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA702395957000132373 /* WeatherForecastPresenterInput.swift */; };
+		65E0CA782395957000132373 /* WeatherForecastPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA712395957000132373 /* WeatherForecastPresenterOutput.swift */; };
+		65E0CA792395957000132373 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA722395957000132373 /* WeatherForecastView.swift */; };
+		65E0CA7A2395957000132373 /* WeatherForecastModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA732395957000132373 /* WeatherForecastModuleFactory.swift */; };
+		65E0CA7B2395957000132373 /* WeatherForecastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E0CA742395957000132373 /* WeatherForecastView.xib */; };
+		65E0CA7C2395957000132373 /* WeatherForecastViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA752395957000132373 /* WeatherForecastViewDelegate.swift */; };
+		65E0CA802395B3AE00132373 /* WeatherForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0CA7E2395B3AE00132373 /* WeatherForecastCollectionViewCell.swift */; };
+		65E0CA812395B3AE00132373 /* WeatherForecastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E0CA7F2395B3AE00132373 /* WeatherForecastCollectionViewCell.xib */; };
 		D27A6DFB0ACA9BCD78BD74D3 /* Pods_MyMeteoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA104896BB9343BBEA4BFBB8 /* Pods_MyMeteoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +149,18 @@
 		659AD9532393E1A7007B5622 /* france_cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = france_cities.json; sourceTree = "<group>"; };
 		659AD9582393E1F8007B5622 /* FranceCitiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FranceCitiesRepository.swift; sourceTree = "<group>"; };
 		659AD95A2393E203007B5622 /* FranceCitiesRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FranceCitiesRepositoryProtocol.swift; sourceTree = "<group>"; };
+		65E0CA692395955E00132373 /* WeatherForecastInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastInteractorOutput.swift; sourceTree = "<group>"; };
+		65E0CA6A2395955E00132373 /* WeatherForecastInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastInteractorInput.swift; sourceTree = "<group>"; };
+		65E0CA6B2395955E00132373 /* WeatherForecastInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastInteractor.swift; sourceTree = "<group>"; };
+		65E0CA6F2395957000132373 /* WeatherForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastPresenter.swift; sourceTree = "<group>"; };
+		65E0CA702395957000132373 /* WeatherForecastPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastPresenterInput.swift; sourceTree = "<group>"; };
+		65E0CA712395957000132373 /* WeatherForecastPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastPresenterOutput.swift; sourceTree = "<group>"; };
+		65E0CA722395957000132373 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
+		65E0CA732395957000132373 /* WeatherForecastModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastModuleFactory.swift; sourceTree = "<group>"; };
+		65E0CA742395957000132373 /* WeatherForecastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherForecastView.xib; sourceTree = "<group>"; };
+		65E0CA752395957000132373 /* WeatherForecastViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastViewDelegate.swift; sourceTree = "<group>"; };
+		65E0CA7E2395B3AE00132373 /* WeatherForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastCollectionViewCell.swift; sourceTree = "<group>"; };
+		65E0CA7F2395B3AE00132373 /* WeatherForecastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherForecastCollectionViewCell.xib; sourceTree = "<group>"; };
 		7438235ACC1AD1858AE4EFA8 /* Pods-MyMeteo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMeteo.release.xcconfig"; path = "Target Support Files/Pods-MyMeteo/Pods-MyMeteo.release.xcconfig"; sourceTree = "<group>"; };
 		AA104896BB9343BBEA4BFBB8 /* Pods_MyMeteoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMeteoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2370C098C6E6ACFA1ADB00B /* Pods-MyMeteoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMeteoTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMeteoTests/Pods-MyMeteoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +299,7 @@
 		659AD9002392FBF6007B5622 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				65E0CA662395950100132373 /* WeatherForecast */,
 				659AD9022392FC2B007B5622 /* WeatherDetails */,
 				659AD9012392FC07007B5622 /* WeatherList */,
 			);
@@ -415,6 +440,49 @@
 			path = FranceCities;
 			sourceTree = "<group>";
 		};
+		65E0CA662395950100132373 /* WeatherForecast */ = {
+			isa = PBXGroup;
+			children = (
+				65E0CA732395957000132373 /* WeatherForecastModuleFactory.swift */,
+				65E0CA672395954200132373 /* User Interface */,
+				65E0CA682395954900132373 /* Business Logic */,
+			);
+			path = WeatherForecast;
+			sourceTree = "<group>";
+		};
+		65E0CA672395954200132373 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				65E0CA7D2395B38900132373 /* cell */,
+				65E0CA742395957000132373 /* WeatherForecastView.xib */,
+				65E0CA722395957000132373 /* WeatherForecastView.swift */,
+				65E0CA6F2395957000132373 /* WeatherForecastPresenter.swift */,
+				65E0CA702395957000132373 /* WeatherForecastPresenterInput.swift */,
+				65E0CA712395957000132373 /* WeatherForecastPresenterOutput.swift */,
+				65E0CA752395957000132373 /* WeatherForecastViewDelegate.swift */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		65E0CA682395954900132373 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				65E0CA6B2395955E00132373 /* WeatherForecastInteractor.swift */,
+				65E0CA6A2395955E00132373 /* WeatherForecastInteractorInput.swift */,
+				65E0CA692395955E00132373 /* WeatherForecastInteractorOutput.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		65E0CA7D2395B38900132373 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				65E0CA7E2395B3AE00132373 /* WeatherForecastCollectionViewCell.swift */,
+				65E0CA7F2395B3AE00132373 /* WeatherForecastCollectionViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		826C85216F6BEB28ADD3A917 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,9 +593,11 @@
 				659AD8EB2392FBB4007B5622 /* LaunchScreen.storyboard in Resources */,
 				659AD8E82392FBB4007B5622 /* Preview Assets.xcassets in Resources */,
 				659AD9542393E1A7007B5622 /* france_cities.json in Resources */,
+				65E0CA7B2395957000132373 /* WeatherForecastView.xib in Resources */,
 				659AD90F2392FCE4007B5622 /* TableViewLoaderTableViewCell.xib in Resources */,
 				659AD92D2392FF33007B5622 /* WeatherList.storyboard in Resources */,
 				659AD90E2392FCE4007B5622 /* TableViewLoader.xib in Resources */,
+				65E0CA812395B3AE00132373 /* WeatherForecastCollectionViewCell.xib in Resources */,
 				659AD94B2392FF79007B5622 /* WeatherDetails.storyboard in Resources */,
 				1094AF612394432800ACD934 /* WeatherListTableViewCell.xib in Resources */,
 				659AD8E52392FBB4007B5622 /* Assets.xcassets in Resources */,
@@ -675,19 +745,25 @@
 				659AD9312392FF33007B5622 /* WeatherListPresenterInput.swift in Sources */,
 				659AD8DF2392FBB1007B5622 /* AppDelegate.swift in Sources */,
 				659AD9502392FF79007B5622 /* WeatherDetailsPresenterOutput.swift in Sources */,
+				65E0CA772395957000132373 /* WeatherForecastPresenterInput.swift in Sources */,
 				659AD9222392FE81007B5622 /* WeatherAPIRepository.swift in Sources */,
 				659AD93A2392FF3D007B5622 /* WeatherListInteractor.swift in Sources */,
 				659AD95B2393E203007B5622 /* FranceCitiesRepositoryProtocol.swift in Sources */,
+				65E0CA6D2395955E00132373 /* WeatherForecastInteractorInput.swift in Sources */,
+				65E0CA7A2395957000132373 /* WeatherForecastModuleFactory.swift in Sources */,
 				659AD91C2392FD05007B5622 /* Collection+Extensions.swift in Sources */,
 				659AD9322392FF33007B5622 /* WeatherListPresenterOutput.swift in Sources */,
+				65E0CA762395957000132373 /* WeatherForecastPresenter.swift in Sources */,
 				659AD94D2392FF79007B5622 /* WeatherDetailsRouter.swift in Sources */,
 				659AD9412392FF6D007B5622 /* WeatherDetailsInteractorInput.swift in Sources */,
 				659AD9342392FF33007B5622 /* WeatherListRouterInput.swift in Sources */,
+				65E0CA792395957000132373 /* WeatherForecastView.swift in Sources */,
 				659AD9402392FF6D007B5622 /* WeatherDetailsInteractorOutput.swift in Sources */,
 				659AD90D2392FCE4007B5622 /* TableViewLoaderTableViewCell.swift in Sources */,
 				659AD91B2392FD05007B5622 /* UITableView+Extensions.swift in Sources */,
 				659AD92E2392FF33007B5622 /* WeatherListPresenter.swift in Sources */,
 				1094AF602394432800ACD934 /* WeatherListTableViewCell.swift in Sources */,
+				65E0CA7C2395957000132373 /* WeatherForecastViewDelegate.swift in Sources */,
 				659AD9332392FF33007B5622 /* WeatherListModuleFactory.swift in Sources */,
 				659AD9422392FF6D007B5622 /* WeatherDetailsInteractor.swift in Sources */,
 				659AD9392392FF3D007B5622 /* WeatherListInteractorInput.swift in Sources */,
@@ -699,12 +775,16 @@
 				659AD9132392FCE4007B5622 /* ViewLoadable.swift in Sources */,
 				659AD94E2392FF79007B5622 /* WeatherDetailsViewController.swift in Sources */,
 				105ED2672393F1CC00CC44B9 /* DispatchQueue+Background.swift in Sources */,
+				65E0CA6E2395955E00132373 /* WeatherForecastInteractor.swift in Sources */,
 				659AD94F2392FF79007B5622 /* WeatherDetailsPresenterInput.swift in Sources */,
 				659AD9202392FE7B007B5622 /* WeatherAPIRepositoryProtocol.swift in Sources */,
+				65E0CA6C2395955E00132373 /* WeatherForecastInteractorOutput.swift in Sources */,
+				65E0CA782395957000132373 /* WeatherForecastPresenterOutput.swift in Sources */,
 				659AD9122392FCE4007B5622 /* Loadable.swift in Sources */,
 				659AD9592393E1F9007B5622 /* FranceCitiesRepository.swift in Sources */,
 				105ED2652393F16E00CC44B9 /* JSONFileReadable.swift in Sources */,
 				659AD92F2392FF33007B5622 /* WeatherListRouter.swift in Sources */,
+				65E0CA802395B3AE00132373 /* WeatherForecastCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

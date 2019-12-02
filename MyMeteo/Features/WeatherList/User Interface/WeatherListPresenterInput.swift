@@ -24,4 +24,5 @@ protocol WeatherListPresenterInput {
     func viewModelForRowAtIndexPath(_ indexPath: IndexPath) -> WeatherListPresenterViewModelProtocol
     func prefetchRowsAtIndexPaths(_ indexPaths: [IndexPath]?)
     func cancelPrefetchingForRowsAt(_ indexPaths: [IndexPath]?)
+    func didSelectRowAtIndexPath(_ indexPath: IndexPath)
 }

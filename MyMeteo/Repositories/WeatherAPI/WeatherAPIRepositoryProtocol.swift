@@ -25,6 +25,13 @@ enum WeatherAPIRepositoryUnit {
 }
 
 /// sourcery: AutoMockable
+protocol WeatherAPIForecastResponseProtocol {
+    var weatherTemperature: Double? { get }
+    var iconUrl: URL? { get }
+    var date: String? { get }
+}
+
+/// sourcery: AutoMockable
 protocol WeatherAPIWeatherResponseProtocol  {
     var id: Int? { get }
     var main: String? { get }
@@ -59,5 +66,8 @@ protocol WeatherAPICityInfoResponseProtocol {
 /// sourcery: AutoMockable
 protocol WeatherAPIRepositoryInput {
     func getWeatherInfo(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit, success: @escaping (WeatherAPICityInfoResponseProtocol) -> Void, failure: ((WeatherAPIRepositoryError, String) -> Void)?)
+    
+    func getWeatherForecastInfo(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit, success: @escaping ([WeatherAPIForecastResponseProtocol]) -> Void, failure: ((WeatherAPIRepositoryError) -> Void)?)
+    
     func cancel(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit)
 }

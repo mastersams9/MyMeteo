@@ -25,6 +25,7 @@ class WeatherAPIRepository {
         static let defaultLanguage = "fr"
         static let apiKey = "9f4e4f0ca43e636551b83b52d7284ca7"
         static let cityWeatherURL = "\(baseURL)/weather?q=\(placeholderCity)&appid=\(apiKey)&units=\(placeholderUnits)&lang=\(placeholderLanguage)"
+        static let cityForecastWeatherURL = "\(baseURL)/forecast?q=\(placeholderCity)&appid=\(apiKey)&units=\(placeholderUnits)&lang=\(placeholderLanguage)"
         static let iconURL = "http://openweathermap.org/img/wn/\(placeholderIconCode)@2x.png"
         
     }
@@ -53,12 +54,60 @@ class WeatherAPIRepository {
 // MARK: - WeatherAPIRepositoryInput
 
 extension WeatherAPIRepository: WeatherAPIRepositoryInput {
-
+    
     func cancel(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit) {
         let urlString = Constants.cityWeatherURL.replacingOccurrences(of: Constants.placeholderCity, with: city).replacingOccurrences(of: Constants.placeholderUnits, with: unit.description).replacingOccurrences(of: Constants.placeholderLanguage, with: Locale.current.languageCode ?? Constants.defaultLanguage)
         api.cancel(urlString: urlString)
     }
+    
+    
+    func getWeatherForecastInfo(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit, success: @escaping ([WeatherAPIForecastResponseProtocol]) -> Void, failure: ((WeatherAPIRepositoryError) -> Void)?) {
 
+        let urlString = Constants.cityForecastWeatherURL
+            .replacingOccurrences(of: Constants.placeholderCity, with: city)
+            .replacingOccurrences(of: Constants.placeholderUnits, with: unit.description)
+            .replacingOccurrences(of: Constants.placeholderLanguage, with: Locale.current.languageCode ?? Constants.defaultLanguage)
+        
+        api.request(urlString: urlString,
+                    method: .get,
+                    parameters: [:],
+                    success: { data in
+                        DispatchQueue.background.async {
+                            do {
+                                let decodableResponse = try JSONDecoder().decode(WeatherAPIForecastListCodableResponse.self, from: data)
+                               
+                                let response = decodableResponse.list?.compactMap {
+                                    
+                                    WeatherAPIForecastResponse(weatherTemperature: $0.main?.temp, iconUrl: URL(string: Constants.iconURL.replacingOccurrences(of: Constants.placeholderIconCode, with: ($0.weather?.first?.icon) ?? "")), date: $0.dt_txt)
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    success(response ?? [])
+                                    return
+                                }
+                                
+                            }
+                            catch {
+                                print("error: \(error)")
+                                DispatchQueue.main.async {
+                                    failure?(.unknown)
+                                }
+                                return
+                            }
+                            
+                            
+                        }
+        },
+                    failure: { [weak self] in
+                        guard let self = self else { return }
+                        let error = self.prepareErrorManagement(from: $0)
+                        DispatchQueue.main.async {
+                            failure?(error)
+                        }
+        })
+        
+    }
+    
     func getWeatherInfo(forCity city: String,
                         withUnit unit: WeatherAPIRepositoryUnit,
                         success: @escaping (WeatherAPICityInfoResponseProtocol) -> Void,
@@ -78,39 +127,39 @@ extension WeatherAPIRepository: WeatherAPIRepositoryInput {
                                                                           humidity: decodableResponse.main?.humidity,
                                                                           tempMin: decodableResponse.main?.temp_min,
                                                                           tempMax: decodableResponse.main?.temp_max)
-
-
+                                
+                                
                                 var iconURL: URL? = nil
                                 if let decodableResponseWeatherIcon = decodableResponse.weather?.first?.icon {
                                     iconURL = URL(string: Constants.iconURL.replacingOccurrences(of: Constants.placeholderIconCode, with: decodableResponseWeatherIcon))
                                 }
-
+                                
                                 let weatherResponse = WeatherAPIWeatherResponse(id: decodableResponse.weather?.first?.id,
                                                                                 main: decodableResponse.weather?.first?.main,
                                                                                 description: decodableResponse.weather?.first?.description,
                                                                                 iconUrl: iconURL)
-
+                                
                                 let response = WeatherAPICityInfoResponse(id: decodableResponse.id,
                                                                           name: decodableResponse.name,
                                                                           weather: weatherResponse,
                                                                           main: mainResponse,
                                                                           wind: windResponse)
-
+                                
                                 DispatchQueue.main.async {
                                     success(response)
                                     return
                                 }
-
+                                
                             }
                             catch {
                                 print("error: \(error)")
-                                    DispatchQueue.main.async {
-                                        failure?(.unknown, city)
-                                    }
-                                    return
+                                DispatchQueue.main.async {
+                                    failure?(.unknown, city)
+                                }
+                                return
                             }
-
-
+                            
+                            
                         }
         },
                     failure: { [weak self] in
@@ -121,7 +170,7 @@ extension WeatherAPIRepository: WeatherAPIRepositoryInput {
                         }
         })
     }
-
+    
 }
 
 // MARK: - Privates
@@ -154,6 +203,16 @@ private struct WeatherAPICityInfoCodableResponse: Decodable {
     var weather: [WeatherAPIWeatherCodableResponse]?
     var main: WeatherAPIMainCodableResponse?
     var wind: WeatherAPIWindCodableResponse?
+}
+
+private struct WeatherAPIForecastListCodableResponse: Decodable {
+    var list: [WeatherAPIForecastCodableResponse]?
+}
+
+private struct WeatherAPIForecastCodableResponse: Decodable {
+    var main: WeatherAPIMainCodableResponse?
+    var weather: [WeatherAPIWeatherCodableResponse]?
+    var dt_txt: String?
 }
 
 // MARK: - WeatherAPIWeatherResponseProtocol
@@ -190,4 +249,11 @@ private struct WeatherAPICityInfoResponse: WeatherAPICityInfoResponseProtocol {
     var weather: WeatherAPIWeatherResponseProtocol?
     var main: WeatherAPIMainResponseProtocol?
     var wind: WeatherAPIWindResponseProtocol?
+}
+
+// MARK: - WeatherAPIForecastResponseProtocol
+private struct WeatherAPIForecastResponse: WeatherAPIForecastResponseProtocol {
+    var weatherTemperature: Double?
+    var iconUrl: URL?
+    var date: String?
 }
