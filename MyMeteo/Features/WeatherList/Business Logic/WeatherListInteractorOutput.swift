@@ -17,4 +17,5 @@ public protocol WeatherListInteractorOutput: class {
     func notifyFranceCitiesListNotFoundError()
     func notifyFranceCitiesEmptyListError()
     func updateItem(atIndex index: Int, forCategoryIndex categoryIndex: Int)
+    func routeToDetails(withCity city: String)
 }

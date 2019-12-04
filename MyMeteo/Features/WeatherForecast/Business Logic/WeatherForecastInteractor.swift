@@ -2,7 +2,7 @@
 //  WeatherForecastInteractor.swift
 //  MyMeteo
 //
-//  Rahim template version 1.0
+//
 //
 //  Created by Sami Benmakhlouf on 02/12/2019.
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
@@ -34,7 +34,7 @@ class WeatherForecastInteractor {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
-        for i in 1...5 {
+        for i in 1..<5 {
             if let date = Calendar.current.date(byAdding: .day, value: i, to: currentDate) {
                 dates.append(formatter.string(from: date))
             }
@@ -72,6 +72,12 @@ extension WeatherForecastInteractor: WeatherForecastInteractorInput {
                 return
             }
             self.items = self.getWeatherForecastInteractorItemList(weatherAPIForecastListResponse: weatherForecastListResponse)
+            if self.items.isEmpty {
+                self.output?.notifyEmptyListError()
+                return
+            } else {
+                self.output?.notifySuccess()
+            }
         }, failure: { [weak self] error in
             switch error {
             case .network:

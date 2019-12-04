@@ -10,6 +10,7 @@ import Foundation
 
 enum WeatherListInteractorItemUnit {
     case celsius
+    case fahrenheit
 }
 
 protocol WeatherListInteractorItemProtocol {
@@ -20,7 +21,6 @@ protocol WeatherListInteractorItemProtocol {
     var weatherMinTemperature: Double? { get }
     var weatherMaxTemperature: Double? { get }
     var temperatureUnit: WeatherListInteractorItemUnit { get }
-
 }
 
 protocol WeatherListInteractorInput {
@@ -32,5 +32,5 @@ protocol WeatherListInteractorInput {
     func item(forIndex index: Int, atCategoryIndex categoryIndex: Int) -> WeatherListInteractorItemProtocol?
     func preloadItems(at indexes: [Int]?)
     func cancelItems(at indexes: [Int]?)
-    func didSelect()
+    func didSelect(at index: Int)
 }

@@ -2,7 +2,7 @@
 //  WeatherForecastModuleFactory.swift
 //  MyMeteo
 //
-//  Rahim template version 1.0
+//
 //
 //  Created by Sami Benmakhlouf on 02/12/2019.
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
@@ -19,7 +19,7 @@ class WeatherForecastModuleFactory {
         let presenter = WeatherForecastPresenter(interactor: interactor)
         interactor.output = presenter
         
-        let view = UINib(nibName: "WeatherForecastView", bundle: nil).instantiate(withOwner: self, options: nil).first as? WeatherForecastView
+        let view = UINib(nibName: "WeatherForecastView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? WeatherForecastView
         view?.presenter = presenter
         view?.imageLoader = MyMeteoImageLoader()
         view?.delegate = delegate

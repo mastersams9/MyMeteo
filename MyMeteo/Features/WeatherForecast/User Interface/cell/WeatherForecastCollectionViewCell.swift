@@ -10,8 +10,8 @@ import UIKit
 
 class WeatherForecastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var meteoImageView: UIImageView!
-    @IBOutlet weak var minimalWeatherLabel: UILabel!
-    @IBOutlet weak var maximalWeatherLabel: UILabel!
+    @IBOutlet weak var minMaxWeatherLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

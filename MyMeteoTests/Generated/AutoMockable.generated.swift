@@ -134,6 +134,12 @@ class WeatherAPICityInfoResponseProtocolMock: WeatherAPICityInfoResponseProtocol
     var wind: WeatherAPIWindResponseProtocol?
 
 }
+class WeatherAPIForecastResponseProtocolMock: WeatherAPIForecastResponseProtocol {
+    var weatherTemperature: Double?
+    var iconUrl: URL?
+    var date: String?
+
+}
 class WeatherAPIMainResponseProtocolMock: WeatherAPIMainResponseProtocol {
     var temp: Double?
     var pressure: Double?
@@ -159,6 +165,23 @@ class WeatherAPIRepositoryInputMock: WeatherAPIRepositoryInput {
         getWeatherInfoForCityWithUnitSuccessFailureReceivedArguments = (city: city, unit: unit, success: success, failure: failure)
         getWeatherInfoForCityWithUnitSuccessFailureReceivedInvocations.append((city: city, unit: unit, success: success, failure: failure))
         getWeatherInfoForCityWithUnitSuccessFailureClosure?(city, unit, success, failure)
+    }
+
+    //MARK: - getWeatherForecastInfo
+
+    var getWeatherForecastInfoForCityWithUnitSuccessFailureCallsCount = 0
+    var getWeatherForecastInfoForCityWithUnitSuccessFailureCalled: Bool {
+        return getWeatherForecastInfoForCityWithUnitSuccessFailureCallsCount > 0
+    }
+    var getWeatherForecastInfoForCityWithUnitSuccessFailureReceivedArguments: (city: String, unit: WeatherAPIRepositoryUnit, success: ([WeatherAPIForecastResponseProtocol]) -> Void, failure: ((WeatherAPIRepositoryError) -> Void)?)?
+    var getWeatherForecastInfoForCityWithUnitSuccessFailureReceivedInvocations: [(city: String, unit: WeatherAPIRepositoryUnit, success: ([WeatherAPIForecastResponseProtocol]) -> Void, failure: ((WeatherAPIRepositoryError) -> Void)?)] = []
+    var getWeatherForecastInfoForCityWithUnitSuccessFailureClosure: ((String, WeatherAPIRepositoryUnit, @escaping ([WeatherAPIForecastResponseProtocol]) -> Void, ((WeatherAPIRepositoryError) -> Void)?) -> Void)?
+
+    func getWeatherForecastInfo(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit, success: @escaping ([WeatherAPIForecastResponseProtocol]) -> Void, failure: ((WeatherAPIRepositoryError) -> Void)?) {
+        getWeatherForecastInfoForCityWithUnitSuccessFailureCallsCount += 1
+        getWeatherForecastInfoForCityWithUnitSuccessFailureReceivedArguments = (city: city, unit: unit, success: success, failure: failure)
+        getWeatherForecastInfoForCityWithUnitSuccessFailureReceivedInvocations.append((city: city, unit: unit, success: success, failure: failure))
+        getWeatherForecastInfoForCityWithUnitSuccessFailureClosure?(city, unit, success, failure)
     }
 
     //MARK: - cancel
@@ -189,6 +212,74 @@ class WeatherAPIWeatherResponseProtocolMock: WeatherAPIWeatherResponseProtocol {
 class WeatherAPIWindResponseProtocolMock: WeatherAPIWindResponseProtocol {
     var speed: Double?
     var deg: Double?
+
+}
+class WeatherForecastInteractorOutputMock: WeatherForecastInteractorOutput {
+
+    //MARK: - notifySuccess
+
+    var notifySuccessCallsCount = 0
+    var notifySuccessCalled: Bool {
+        return notifySuccessCallsCount > 0
+    }
+    var notifySuccessClosure: (() -> Void)?
+
+    func notifySuccess() {
+        notifySuccessCallsCount += 1
+        notifySuccessClosure?()
+    }
+
+    //MARK: - notifyUnknownError
+
+    var notifyUnknownErrorCallsCount = 0
+    var notifyUnknownErrorCalled: Bool {
+        return notifyUnknownErrorCallsCount > 0
+    }
+    var notifyUnknownErrorClosure: (() -> Void)?
+
+    func notifyUnknownError() {
+        notifyUnknownErrorCallsCount += 1
+        notifyUnknownErrorClosure?()
+    }
+
+    //MARK: - notifyServerError
+
+    var notifyServerErrorCallsCount = 0
+    var notifyServerErrorCalled: Bool {
+        return notifyServerErrorCallsCount > 0
+    }
+    var notifyServerErrorClosure: (() -> Void)?
+
+    func notifyServerError() {
+        notifyServerErrorCallsCount += 1
+        notifyServerErrorClosure?()
+    }
+
+    //MARK: - notifyNetworkError
+
+    var notifyNetworkErrorCallsCount = 0
+    var notifyNetworkErrorCalled: Bool {
+        return notifyNetworkErrorCallsCount > 0
+    }
+    var notifyNetworkErrorClosure: (() -> Void)?
+
+    func notifyNetworkError() {
+        notifyNetworkErrorCallsCount += 1
+        notifyNetworkErrorClosure?()
+    }
+
+    //MARK: - notifyEmptyListError
+
+    var notifyEmptyListErrorCallsCount = 0
+    var notifyEmptyListErrorCalled: Bool {
+        return notifyEmptyListErrorCallsCount > 0
+    }
+    var notifyEmptyListErrorClosure: (() -> Void)?
+
+    func notifyEmptyListError() {
+        notifyEmptyListErrorCallsCount += 1
+        notifyEmptyListErrorClosure?()
+    }
 
 }
 class WeatherListInteractorOutputMock: WeatherListInteractorOutput {
@@ -273,6 +364,23 @@ class WeatherListInteractorOutputMock: WeatherListInteractorOutput {
         updateItemAtIndexForCategoryIndexReceivedArguments = (index: index, categoryIndex: categoryIndex)
         updateItemAtIndexForCategoryIndexReceivedInvocations.append((index: index, categoryIndex: categoryIndex))
         updateItemAtIndexForCategoryIndexClosure?(index, categoryIndex)
+    }
+
+    //MARK: - routeToDetails
+
+    var routeToDetailsWithCityCallsCount = 0
+    var routeToDetailsWithCityCalled: Bool {
+        return routeToDetailsWithCityCallsCount > 0
+    }
+    var routeToDetailsWithCityReceivedCity: String?
+    var routeToDetailsWithCityReceivedInvocations: [String] = []
+    var routeToDetailsWithCityClosure: ((String) -> Void)?
+
+    func routeToDetails(withCity city: String) {
+        routeToDetailsWithCityCallsCount += 1
+        routeToDetailsWithCityReceivedCity = city
+        routeToDetailsWithCityReceivedInvocations.append(city)
+        routeToDetailsWithCityClosure?(city)
     }
 
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol WeatherDetailsPresenterInput {
   func viewDidLoad()

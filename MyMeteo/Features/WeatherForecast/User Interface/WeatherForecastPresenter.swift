@@ -2,7 +2,7 @@
 //  WeatherForecastPresenter.swift
 //  MyMeteo
 //
-//  Rahim template version 1.0
+//
 //
 //  Created by Sami Benmakhlouf on 02/12/2019.
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
@@ -44,26 +44,31 @@ extension WeatherForecastPresenter: WeatherForecastPresenterInput {
     
     func viewModelForRowAtIndexPath(_ indexPath: IndexPath) -> WeatherForecastPresenterViewModelProtocol
     {
-        var weatherMinTemperatureAttr: NSAttributedString?
-        var weatherMaxTemperatureAttr: NSAttributedString?
+        var weatherMinMaxTemperatureAttr: NSAttributedString?
+
+        var dateAttr: NSAttributedString?
         
         var weatherIconImageURL: URL?
         
         if let item = interactor.item(forIndex: indexPath.row, atCategoryIndex: indexPath.section)
         {
+            var weatherMinTemperatureString = ""
+            var weatherMaxTemperatureString = ""
             if let weatherMinTemperature = item.weatherMinTemperature {
-                weatherMinTemperatureAttr = NSAttributedString(string: "\(Int(weatherMinTemperature.rounded())) \(convertToDisplayableTemperatureUnit(itemUnit: item.temperatureUnit))")
+                weatherMinTemperatureString = "\(Int(weatherMinTemperature.rounded()))"
             }
-            
             if let weatherMaxTemperature = item.weatherMaxTemperature {
-                weatherMaxTemperatureAttr = NSAttributedString(string: "\(Int(weatherMaxTemperature.rounded())) \(convertToDisplayableTemperatureUnit(itemUnit: item.temperatureUnit))")
+                weatherMaxTemperatureString = "\(Int(weatherMaxTemperature.rounded()))"
             }
-            
+            weatherMinMaxTemperatureAttr = NSAttributedString(string: "min:\(weatherMinTemperatureString) max:\(weatherMaxTemperatureString)")
+
             weatherIconImageURL = item.weatherIconUrl
+            
+            dateAttr = NSAttributedString(string: item.date ?? "")
         }
         
         
-        return WeatherForecastPresenterViewModel(weatherIconImagePlaceholder: UIImage(), weatherIconImageURL: weatherIconImageURL, weatherMinTemperature: weatherMinTemperatureAttr, weatherMaxTemperature: weatherMaxTemperatureAttr)
+        return WeatherForecastPresenterViewModel(weatherIconImagePlaceholder: UIImage(), weatherIconImageURL: weatherIconImageURL, weatherMinMaxTemperature: weatherMinMaxTemperatureAttr, date: dateAttr)
         
     }
     
@@ -99,8 +104,8 @@ extension WeatherForecastPresenter: WeatherForecastInteractorOutput {
 private struct WeatherForecastPresenterViewModel: WeatherForecastPresenterViewModelProtocol {
     var weatherIconImagePlaceholder: UIImage
     var weatherIconImageURL: URL?
-    var weatherMinTemperature: NSAttributedString?
-    var weatherMaxTemperature: NSAttributedString?
+    var weatherMinMaxTemperature: NSAttributedString?
+    var date: NSAttributedString?
 }
 
 private struct AlertParams: AlertParamsProtocol {

@@ -56,7 +56,7 @@ class WeatherAPIRepository {
 extension WeatherAPIRepository: WeatherAPIRepositoryInput {
     
     func cancel(forCity city: String, withUnit unit: WeatherAPIRepositoryUnit) {
-        let urlString = Constants.cityWeatherURL.replacingOccurrences(of: Constants.placeholderCity, with: city).replacingOccurrences(of: Constants.placeholderUnits, with: unit.description).replacingOccurrences(of: Constants.placeholderLanguage, with: Locale.current.languageCode ?? Constants.defaultLanguage)
+        let urlString = Constants.cityWeatherURL.replacingOccurrences(of: Constants.placeholderCity, with: city).replacingOccurrences(of: Constants.placeholderUnits, with: unit.description).replacingOccurrences(of: Constants.placeholderLanguage, with: Constants.defaultLanguage)
         api.cancel(urlString: urlString)
     }
     
@@ -66,7 +66,7 @@ extension WeatherAPIRepository: WeatherAPIRepositoryInput {
         let urlString = Constants.cityForecastWeatherURL
             .replacingOccurrences(of: Constants.placeholderCity, with: city)
             .replacingOccurrences(of: Constants.placeholderUnits, with: unit.description)
-            .replacingOccurrences(of: Constants.placeholderLanguage, with: Locale.current.languageCode ?? Constants.defaultLanguage)
+            .replacingOccurrences(of: Constants.placeholderLanguage, with: Constants.defaultLanguage)
         
         api.request(urlString: urlString,
                     method: .get,
@@ -112,7 +112,7 @@ extension WeatherAPIRepository: WeatherAPIRepositoryInput {
                         withUnit unit: WeatherAPIRepositoryUnit,
                         success: @escaping (WeatherAPICityInfoResponseProtocol) -> Void,
                         failure: ((WeatherAPIRepositoryError, String) -> Void)?) {
-        let urlString = Constants.cityWeatherURL.replacingOccurrences(of: Constants.placeholderCity, with: city).replacingOccurrences(of: Constants.placeholderUnits, with: unit.description).replacingOccurrences(of: Constants.placeholderLanguage, with: Locale.current.languageCode ?? Constants.defaultLanguage)
+        let urlString = Constants.cityWeatherURL.replacingOccurrences(of: Constants.placeholderCity, with: city).replacingOccurrences(of: Constants.placeholderUnits, with: unit.description).replacingOccurrences(of: Constants.placeholderLanguage, with: Constants.defaultLanguage)
         api.request(urlString: urlString,
                     method: .get,
                     parameters: [:],

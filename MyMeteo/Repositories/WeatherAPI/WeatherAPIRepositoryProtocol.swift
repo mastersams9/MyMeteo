@@ -11,6 +11,7 @@ import Foundation
 enum WeatherAPIRepositoryUnit {
     case celsius
     case fahrenheit
+    case none
 
     var description: String {
         switch self {

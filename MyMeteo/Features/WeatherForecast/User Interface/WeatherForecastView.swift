@@ -2,7 +2,7 @@
 //  WeatherForecastView.swift
 //  MyMeteo
 //
-//  Rahim template version 1.0
+//
 //
 //  Created by Sami Benmakhlouf on 02/12/2019.
 //  Copyright © 2019 Sami Benmakhlouf. All rights reserved.
@@ -64,8 +64,11 @@ extension WeatherForecastView: UICollectionViewDataSource {
         
         let viewmodel = presenter.viewModelForRowAtIndexPath(indexPath)
         
-        cell.minimalWeatherLabel.attributedText = viewmodel.weatherMinTemperature
-        cell.maximalWeatherLabel.attributedText = viewmodel.weatherMaxTemperature
+        
+        cell.minMaxWeatherLabel.attributedText = viewmodel.weatherMinMaxTemperature
+        cell.minMaxWeatherLabel.adjustsFontSizeToFitWidth = true
+
+        cell.dateLabel.attributedText = viewmodel.date
         
         
         

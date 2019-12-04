@@ -8,6 +8,13 @@
 
 import Foundation
 
-public protocol WeatherDetailsInteractorOutput: class {
+public enum Category: Int {
+    case weatherDetails = 0
+    case weatherForecast
+}
 
+protocol WeatherDetailsInteractorOutput: class {
+    func updateCategories(_ categories: [Category], cityName: String)
+    func notifySuccess(item: WeatherDetailsInteractorItemProtocol)
+    func notifyServerError()
 }

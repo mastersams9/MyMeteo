@@ -31,9 +31,10 @@ protocol WeatherAPIProtocol {
                  failure: ((WeatherAPIError) -> Void)?)
 }
 
-struct WeatherAPI {
+class WeatherAPI {
 
     private let session: URLSession
+    private var list: [String] = []
 
     init() {
         let sessionConfig = URLSessionConfiguration.default
@@ -45,6 +46,23 @@ struct WeatherAPI {
     }
 
     // MARK: - Private
+    
+    private func removeToList(urlString: String) {
+        list.removeAll(where: {
+            $0 == urlString
+        })
+    }
+    
+    private func addToList(urlString: String) {
+        list.append(urlString)
+    }
+    
+    private func checkIfCalled(urlString: String) -> Bool {
+        if list.contains(urlString) {
+            return true
+        }
+        return false
+    }
 
     private func launchRequestURL(_ url: URL,
                                  method: WeatherAPIMethod,
@@ -80,8 +98,6 @@ extension WeatherAPI: WeatherAPIProtocol {
             tasks
                 .filter { $0.state == .running }
                 .filter {
-                    print("originalUrl : \($0.originalRequest?.url?.absoluteString)")
-                    print("urlString : \(urlString)")
                     return $0.originalRequest?.url?.absoluteString == urlString
                 }.first?
                 .cancel()
@@ -93,12 +109,23 @@ extension WeatherAPI: WeatherAPIProtocol {
                  parameters: [String: Any],
                  success: ((Data) -> Void)?,
                  failure: ((WeatherAPIError) -> Void)?) {
+        
+        if self.checkIfCalled(urlString: urlString) {
+            return
+        }
+        
+        self.addToList(urlString: urlString)
+        
         guard let url = URL(string: urlString) else {
             failure?(.unknown)
             return
         }
 
         launchRequestURL(url, method: method, accessToken: nil, parameters: parameters) { dataOpt, response, error in
+            
+            if error != nil {
+                self.removeToList(urlString: urlString)
+            }
             
             switch (response as? HTTPURLResponse)?.statusCode ?? -1 {
             case 200...210:

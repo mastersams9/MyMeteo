@@ -64,8 +64,6 @@ class WeatherListInteractor {
                 }) { [weak self] (_, city) in
                     self?.updateItem(forCityName: city)
                 }
-            } else {
-                print("isRefreshed : true - item.name : \(items[safe: index]?.name)")
             }
         }
     }
@@ -147,7 +145,10 @@ extension WeatherListInteractor: WeatherListInteractorInput {
         }
     }
     
-    func didSelect() {
+    func didSelect(at index: Int) {
+        if let item = self.item(forIndex: index, atCategoryIndex: 0) {
+            output?.routeToDetails(withCity: item.name)
+        }
     }
     
 }

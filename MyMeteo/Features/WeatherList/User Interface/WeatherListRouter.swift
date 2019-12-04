@@ -22,5 +22,9 @@ open class WeatherListRouter {
 // MARK: - WeatherListRouterInput
 
 extension WeatherListRouter: WeatherListRouterInput {
-
+    public func routeToDetails(withCity city: String) {
+        if let vc = WeatherDetailsModuleFactory().makeView(withCity: city) {
+            self.viewController?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }

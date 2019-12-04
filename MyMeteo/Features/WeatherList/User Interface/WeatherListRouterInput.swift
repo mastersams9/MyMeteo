@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol WeatherListRouterInput {
-
+    func routeToDetails(withCity city: String)
 }

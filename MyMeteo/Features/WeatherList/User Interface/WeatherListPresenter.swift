@@ -73,8 +73,11 @@ extension WeatherListPresenter: WeatherListPresenterInput {
             if let weatherDescription = item.weatherDescription {
                 weatherDescriptionAttr = NSAttributedString(string: weatherDescription.capitalized)
             }
+            
+            let unit = convertToDisplayableTemperatureUnit(itemUnit: item.temperatureUnit)
+            
             if let weatherCurrentTemperature = item.weatherCurrentTemperature {
-                weatherCurrentTemperatureAttr = NSAttributedString(string: "\(Int(weatherCurrentTemperature.rounded())) \(convertToDisplayableTemperatureUnit(itemUnit: item.temperatureUnit))")
+                weatherCurrentTemperatureAttr = NSAttributedString(string: "\(Int(weatherCurrentTemperature.rounded()))\(unit)")
             }
             var weatherMinTemperatureString = Constants.defaultValue
             var weatherMaxTemperatureString = Constants.defaultValue
@@ -84,7 +87,7 @@ extension WeatherListPresenter: WeatherListPresenterInput {
             if let weatherMaxTemperature = item.weatherMaxTemperature {
                 weatherMaxTemperatureString = "\(Int(weatherMaxTemperature.rounded()))"
             }
-            weatherMinMaxTemperatureAttr = NSAttributedString(string: "\(weatherMinTemperatureString)\t\(weatherMaxTemperatureString)")
+            weatherMinMaxTemperatureAttr = NSAttributedString(string: "min:\(weatherMinTemperatureString)\(unit)\t max:\(weatherMaxTemperatureString)\(unit)")
 
             weatherIconImageURL = item.weatherIconUrl
         }
@@ -105,7 +108,7 @@ extension WeatherListPresenter: WeatherListPresenterInput {
     }
     
     func didSelectRowAtIndexPath(_ indexPath: IndexPath) {
-        interactor.didSelect()
+        interactor.didSelect(at: indexPath.row)
     }
 }
 
@@ -114,7 +117,7 @@ extension WeatherListPresenter: WeatherListPresenterInput {
 extension WeatherListPresenter: WeatherListInteractorOutput {
 
     func setDefaultValues() {
-        output?.displayTitle("France Cities Weather Info")
+        output?.displayTitle("Liste de villes")
     }
     
     func notifyLoading() {
@@ -138,6 +141,10 @@ extension WeatherListPresenter: WeatherListInteractorOutput {
 
     func updateItem(atIndex index: Int, forCategoryIndex categoryIndex: Int) {
         output?.reloadRows([IndexPath(row: index, section: categoryIndex)])
+    }
+    
+    func routeToDetails(withCity city: String) {
+        router.routeToDetails(withCity: city)
     }
 }
 
