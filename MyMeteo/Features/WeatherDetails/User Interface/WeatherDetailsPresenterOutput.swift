@@ -23,7 +23,7 @@ protocol WeatherDetailsPresenterViewModelProtocol {
 
 
 protocol WeatherDetailsPresenterOutput: class {
-    func displayViewCategories(_ categories: [CategoryView], cityName: String)
+    func displayViewCategories(cityName: String)
     func displayError(_ params: AlertParamsProtocol)
     func updateView(viewModel: WeatherDetailsPresenterViewModelProtocol)
 }

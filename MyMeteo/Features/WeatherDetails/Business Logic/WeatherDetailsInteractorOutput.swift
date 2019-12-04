@@ -8,13 +8,9 @@
 
 import Foundation
 
-public enum Category: Int {
-    case weatherDetails = 0
-    case weatherForecast
-}
-
+/// sourcery: AutoMockable
 protocol WeatherDetailsInteractorOutput: class {
-    func updateCategories(_ categories: [Category], cityName: String)
+    func updateCategories(cityName: String)
     func notifySuccess(item: WeatherDetailsInteractorItemProtocol)
     func notifyServerError()
 }

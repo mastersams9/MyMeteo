@@ -13,7 +13,7 @@ enum WeatherForecastInteractorItemUnit {
     case celsius
     case fahrenheit
 }
-
+/// sourcery: AutoMockable
 protocol WeatherForecastInteractorItemProtocol {
     var temperatureUnit: WeatherForecastInteractorItemUnit { get }
     var weatherMinTemperature: Double? { get }
@@ -22,6 +22,7 @@ protocol WeatherForecastInteractorItemProtocol {
     var date: String? { get }
 }
 
+/// sourcery: AutoMockable
 protocol WeatherForecastInteractorInput {
     var output: WeatherForecastInteractorOutput? { get set }
     

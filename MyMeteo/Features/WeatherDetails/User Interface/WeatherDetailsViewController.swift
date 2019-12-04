@@ -36,25 +36,18 @@ class WeatherDetailsViewController: UIViewController {
 // MARK: - WeatherDetailsPresenterOutput
 
 extension WeatherDetailsViewController: WeatherDetailsPresenterOutput {
-    func displayViewCategories(_ categories: [CategoryView], cityName: String) {
-        categories.forEach {
-            switch $0 {
-            case .weatherDetails:
-                break
-            case .weatherForecast:
-                if let weatherForeCastView = WeatherForecastModuleFactory().makeView(withCityName: cityName) {
-                    weatherForeCastView.viewDidLoad()
-                    weatherForeCastView.frame.size.height = self.foreCastView.frame.height
-                    weatherForeCastView.frame.size.width = self.foreCastView.frame.width
-                    self.foreCastView.addSubview(weatherForeCastView)
-                }
-            }
+    func displayViewCategories(cityName: String) {
+        if let weatherForeCastView = WeatherForecastModuleFactory().makeView(withCityName: cityName) {
+            weatherForeCastView.viewDidLoad()
+            weatherForeCastView.frame.size.height = self.foreCastView.frame.height
+            weatherForeCastView.frame.size.width = self.foreCastView.frame.width
+            self.foreCastView.addSubview(weatherForeCastView)
         }
     }
     func displayError(_ params: AlertParamsProtocol) {
         presentAlertPopupWithTextfield(params.title,
-        message: params.message,
-        confirmationTitle: params.buttonOkTitle)
+                                       message: params.message,
+                                       confirmationTitle: params.buttonOkTitle)
     }
     
     func updateView(viewModel: WeatherDetailsPresenterViewModelProtocol) {

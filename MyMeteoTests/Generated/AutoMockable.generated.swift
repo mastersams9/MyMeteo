@@ -214,6 +214,121 @@ class WeatherAPIWindResponseProtocolMock: WeatherAPIWindResponseProtocol {
     var deg: Double?
 
 }
+class WeatherDetailsInteractorOutputMock: WeatherDetailsInteractorOutput {
+
+    //MARK: - updateCategories
+
+    var updateCategoriesCityNameCallsCount = 0
+    var updateCategoriesCityNameCalled: Bool {
+        return updateCategoriesCityNameCallsCount > 0
+    }
+    var updateCategoriesCityNameReceivedCityName: String?
+    var updateCategoriesCityNameReceivedInvocations: [String] = []
+    var updateCategoriesCityNameClosure: ((String) -> Void)?
+
+    func updateCategories(cityName: String) {
+        updateCategoriesCityNameCallsCount += 1
+        updateCategoriesCityNameReceivedCityName = cityName
+        updateCategoriesCityNameReceivedInvocations.append(cityName)
+        updateCategoriesCityNameClosure?(cityName)
+    }
+
+    //MARK: - notifySuccess
+
+    var notifySuccessItemCallsCount = 0
+    var notifySuccessItemCalled: Bool {
+        return notifySuccessItemCallsCount > 0
+    }
+    var notifySuccessItemReceivedItem: WeatherDetailsInteractorItemProtocol?
+    var notifySuccessItemReceivedInvocations: [WeatherDetailsInteractorItemProtocol] = []
+    var notifySuccessItemClosure: ((WeatherDetailsInteractorItemProtocol) -> Void)?
+
+    func notifySuccess(item: WeatherDetailsInteractorItemProtocol) {
+        notifySuccessItemCallsCount += 1
+        notifySuccessItemReceivedItem = item
+        notifySuccessItemReceivedInvocations.append(item)
+        notifySuccessItemClosure?(item)
+    }
+
+    //MARK: - notifyServerError
+
+    var notifyServerErrorCallsCount = 0
+    var notifyServerErrorCalled: Bool {
+        return notifyServerErrorCallsCount > 0
+    }
+    var notifyServerErrorClosure: (() -> Void)?
+
+    func notifyServerError() {
+        notifyServerErrorCallsCount += 1
+        notifyServerErrorClosure?()
+    }
+
+}
+class WeatherForecastInteractorInputMock: WeatherForecastInteractorInput {
+    var output: WeatherForecastInteractorOutput?
+
+    //MARK: - retrieve
+
+    var retrieveCallsCount = 0
+    var retrieveCalled: Bool {
+        return retrieveCallsCount > 0
+    }
+    var retrieveClosure: (() -> Void)?
+
+    func retrieve() {
+        retrieveCallsCount += 1
+        retrieveClosure?()
+    }
+
+    //MARK: - numberOfItemsForSection
+
+    var numberOfItemsForSectionCallsCount = 0
+    var numberOfItemsForSectionCalled: Bool {
+        return numberOfItemsForSectionCallsCount > 0
+    }
+    var numberOfItemsForSectionReceivedSection: Int?
+    var numberOfItemsForSectionReceivedInvocations: [Int] = []
+    var numberOfItemsForSectionReturnValue: Int!
+    var numberOfItemsForSectionClosure: ((Int) -> Int)?
+
+    func numberOfItemsForSection(_ section: Int) -> Int {
+        numberOfItemsForSectionCallsCount += 1
+        numberOfItemsForSectionReceivedSection = section
+        numberOfItemsForSectionReceivedInvocations.append(section)
+        return numberOfItemsForSectionClosure.map({ $0(section) }) ?? numberOfItemsForSectionReturnValue
+    }
+
+    //MARK: - item
+
+    var itemForIndexAtCategoryIndexCallsCount = 0
+    var itemForIndexAtCategoryIndexCalled: Bool {
+        return itemForIndexAtCategoryIndexCallsCount > 0
+    }
+    var itemForIndexAtCategoryIndexReceivedArguments: (index: Int, categoryIndex: Int)?
+    var itemForIndexAtCategoryIndexReceivedInvocations: [(index: Int, categoryIndex: Int)] = []
+    var itemForIndexAtCategoryIndexReturnValue: WeatherForecastInteractorItemProtocol?
+    var itemForIndexAtCategoryIndexClosure: ((Int, Int) -> WeatherForecastInteractorItemProtocol?)?
+
+    func item(forIndex index: Int, atCategoryIndex categoryIndex: Int) -> WeatherForecastInteractorItemProtocol? {
+        itemForIndexAtCategoryIndexCallsCount += 1
+        itemForIndexAtCategoryIndexReceivedArguments = (index: index, categoryIndex: categoryIndex)
+        itemForIndexAtCategoryIndexReceivedInvocations.append((index: index, categoryIndex: categoryIndex))
+        return itemForIndexAtCategoryIndexClosure.map({ $0(index, categoryIndex) }) ?? itemForIndexAtCategoryIndexReturnValue
+    }
+
+}
+class WeatherForecastInteractorItemProtocolMock: WeatherForecastInteractorItemProtocol {
+    var temperatureUnit: WeatherForecastInteractorItemUnit {
+        get { return underlyingTemperatureUnit }
+        set(value) { underlyingTemperatureUnit = value }
+    }
+    var underlyingTemperatureUnit: WeatherForecastInteractorItemUnit!
+    var weatherMinTemperature: Double?
+    var weatherMaxTemperature: Double?
+    var weatherIconUrl: URL?
+    var date: String?
+
+}
 class WeatherForecastInteractorOutputMock: WeatherForecastInteractorOutput {
 
     //MARK: - notifySuccess

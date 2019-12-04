@@ -46,15 +46,8 @@ extension WeatherDetailsPresenter: WeatherDetailsPresenterInput {
 // MARK: - WeatherDetailsInteractorOutput
 
 extension WeatherDetailsPresenter: WeatherDetailsInteractorOutput {
-    func updateCategories(_ categories: [Category], cityName: String) {
-        output?.displayViewCategories(categories.map {
-            switch $0 {
-            case .weatherDetails:
-                return .weatherDetails
-            case .weatherForecast:
-                return .weatherForecast
-            }
-        }, cityName: cityName)
+    func updateCategories(cityName: String) {
+        output?.displayViewCategories(cityName: cityName)
     }
     
     func notifySuccess(item: WeatherDetailsInteractorItemProtocol) {

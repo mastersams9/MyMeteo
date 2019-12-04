@@ -29,7 +29,7 @@ class WeatherDetailsInteractor {
 
 extension WeatherDetailsInteractor: WeatherDetailsInteractorInput {
     func prepare() {
-        output?.updateCategories([.weatherDetails, .weatherForecast], cityName: city)
+        output?.updateCategories(cityName: city)
     }
     func retrieve() {
         self.weatherAPIRepository.getWeatherInfo(forCity: self.city,
